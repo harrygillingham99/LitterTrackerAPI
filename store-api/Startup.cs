@@ -1,5 +1,6 @@
 using System;
 using System.CodeDom.Compiler;
+using System.Linq;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Builder;
@@ -7,18 +8,17 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using NJsonSchema;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using Scrutor;
 using store_api.CloudDatastore.DAL;
-using store_api.Objects;
 using store_api.Objects.InternalObjects;
 
 namespace store_api
 {
     public class Startup
     {
-        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private readonly string CorsKey = "_myAllowSpecificOrigins";
 
         public Startup(IConfiguration configuration)
         {
@@ -34,32 +34,27 @@ namespace store_api
 
             services.AddCors(options =>
             {
-                options.AddPolicy(MyAllowSpecificOrigins,
+                options.AddPolicy(CorsKey,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000",
-                                "https://e-commerce-assignment-295115.ew.r.appspot.com")
+                        builder.AllowAnyOrigin()
                             .AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .AllowCredentials();
+                            .AllowAnyMethod();
                     });
             });
-            services.AddSwaggerGen(c =>
+            services.AddOpenApiDocument(configure =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
+                configure.Title = "Litter Tracker API";
+                configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
                 {
-                    Title = "store-front-end",
-                    Version = "0.1",
-                    Description =
-                        "API interface to handle the CRUD for the store",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Harry Gillingham",
-                        Email = "harrygillingham@hotmail.com"
-                    }
+                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                    Description = "Type into the textbox: {Firebase JWT Token}"
                 });
+
+                configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             });
-            services.AddOpenApiDocument(options => options.SchemaType = SchemaType.OpenApi3);
 
             ScanForAllRemainingRegistrations(services);
 
@@ -88,7 +83,7 @@ namespace store_api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "C:\\Users\\harry\\shh.json");
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "C:\\Users\\harry\\litter-tracker-b243db1f5c12.json");
             }
 
             app.UseOpenApi();
@@ -99,7 +94,7 @@ namespace store_api
 
             app.UseRouting();
 
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(CorsKey);
 
             app.UseReDoc();
 
