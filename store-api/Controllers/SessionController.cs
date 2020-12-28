@@ -31,12 +31,12 @@ namespace store_api.Controllers
         {
             try
             {
-                var requestUid = await HttpContext.Request.Headers["JWT"].FirstOrDefault().Verify();
+                var requestUid = await HttpContext.Request.Headers["Authorization"].FirstOrDefault().Verify();
 
                 if (requestUid == null)
                     return Unauthorized();
 
-                return Ok((await _sessionRepository.GetCurrentBasket(requestUid)));
+                return Ok(new List<LitterPin>());
             }
             catch (Exception e)
             {
