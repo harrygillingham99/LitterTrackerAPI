@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "store-api", "store-api\store-api.csproj", "{643ED5C7-D543-4ABE-A6E0-A4870106C8FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC} = {6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "store-api.Objects", "store-api.Objects\store-api.Objects.csproj", "{B2872D53-31D9-4D52-A297-BE3C325CF65A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "store-api.CloudDatastore.DAL", "store-api.CloudDatastore.DAL\store-api.CloudDatastore.DAL.csproj", "{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{643ED5C7-D543-4ABE-A6E0-A4870106C8FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{643ED5C7-D543-4ABE-A6E0-A4870106C8FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{643ED5C7-D543-4ABE-A6E0-A4870106C8FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{643ED5C7-D543-4ABE-A6E0-A4870106C8FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2872D53-31D9-4D52-A297-BE3C325CF65A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2872D53-31D9-4D52-A297-BE3C325CF65A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2872D53-31D9-4D52-A297-BE3C325CF65A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2872D53-31D9-4D52-A297-BE3C325CF65A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8DB953E-6668-4AF5-B683-9271556625D7}
+	EndGlobalSection
+EndGlobal
