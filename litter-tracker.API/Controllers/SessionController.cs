@@ -36,7 +36,7 @@ namespace store_api.Controllers
                 if (requestUid == null)
                     return Unauthorized();
 
-                return Ok(new List<LitterPin>());
+                return Ok(new List<LitterPin>(){new LitterPin()});
             }
             catch (Exception e)
             {

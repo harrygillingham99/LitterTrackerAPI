@@ -26,8 +26,8 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\store-api.CloudDatastore.DAL\store-api.CloudDatastore.DAL.csproj" />
-    <ProjectReference Include="..\store-api.Objects\store-api.Objects.csproj" />
+    <ProjectReference Include="..\litter-tracker.CloudDatastore.DAL\litter-tracker.CloudDatastore.DAL.csproj" />
+    <ProjectReference Include="..\litter-tracker.Objects\litter-tracker.Objects.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.yaml">

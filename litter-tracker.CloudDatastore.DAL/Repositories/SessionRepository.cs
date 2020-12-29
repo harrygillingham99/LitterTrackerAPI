@@ -6,13 +6,12 @@ using Microsoft.Extensions.Options;
 using store_api.CloudDatastore.DAL.Interfaces;
 using store_api.Objects.InternalObjects;
 using store_api.Objects.StoreObjects;
-using static store_api.Objects.InternalObjects.DbKinds;
 
 namespace store_api.CloudDatastore.DAL.Repositories
 {
     public class SessionRepository : Repository, ISessionRepository
     {
-        private const DbCollections Kind = DbCollections.LitterPin;
+        private const DbKinds.DbCollections Kind = DbKinds.DbCollections.LitterPin;
 
         public SessionRepository(
             ILogger<SessionRepository> logger, IOptions<ConnectionStrings> connectionStrings) : base(logger, Kind, connectionStrings.Value.ProjectName)

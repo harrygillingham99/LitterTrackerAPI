@@ -1,5 +1,0 @@
-runtime: aspnetcore
-env: flex
-manual_scaling:
-  instances: 2
-service: store-api
