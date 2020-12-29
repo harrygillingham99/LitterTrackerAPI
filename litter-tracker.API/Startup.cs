@@ -86,6 +86,12 @@ namespace store_api
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "C:\\Users\\harry\\litter-tracker-b243db1f5c12.json");
             }
 
+            if (env.IsEnvironment("HomeLab"))
+            {
+                app.UseDeveloperExceptionPage();
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "C:\\litter-tracker-b243db1f5c12.json");
+            }
+
             app.UseOpenApi();
 
             app.UseSwaggerUi3();
