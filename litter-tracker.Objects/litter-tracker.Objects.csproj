@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.49.0" />
     <PackageReference Include="Google.Cloud.Datastore.V1" Version="3.1.0" />
     <PackageReference Include="NJsonSchema" Version="10.3.2" />
   </ItemGroup>
