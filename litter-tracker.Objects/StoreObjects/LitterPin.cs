@@ -5,11 +5,15 @@ namespace store_api.Objects.StoreObjects
 {
     public class LitterPin : DataStoreItem
     {
-        public List<int> ProductAndQuantity { get; set; }
-        public bool HasPlacedOrder { get; set; }
+        public LatLng MarkerLocation { get; set; }
+        public List<string> ImageUrls { get; set; }
+        public string CreatedByUid { get; set; }
 
-        public string UserUid { get; set; }
+    }
 
-        public DateTime? DateOrdered { get; set; }
+    public class LatLng
+    {
+        public long Latitude { get; set; }
+        public long Longitude { get; set; }
     }
 }

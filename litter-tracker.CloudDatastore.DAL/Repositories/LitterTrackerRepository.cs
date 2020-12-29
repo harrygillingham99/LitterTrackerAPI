@@ -9,12 +9,12 @@ using store_api.Objects.StoreObjects;
 
 namespace store_api.CloudDatastore.DAL.Repositories
 {
-    public class SessionRepository : Repository, ISessionRepository
+    public class LitterTrackerRepository : Repository, ILitterTrackerRepository
     {
         private const DbKinds.DbCollections Kind = DbKinds.DbCollections.LitterPin;
 
-        public SessionRepository(
-            ILogger<SessionRepository> logger, IOptions<ConnectionStrings> connectionStrings) : base(logger, Kind, connectionStrings.Value.ProjectName)
+        public LitterTrackerRepository(
+            ILogger<LitterTrackerRepository> logger, IOptions<ConnectionStrings> connectionStrings) : base(logger, Kind, connectionStrings.Value.ProjectName)
         {
         }
 
