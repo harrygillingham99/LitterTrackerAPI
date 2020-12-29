@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using litter_tracker.CloudDatastore.DAL.Interfaces;
+using litter_tracker.Objects.StoreObjects;
 using Microsoft.Extensions.Logging;
-using store_api.CloudDatastore.DAL.Interfaces;
-using store_api.Objects.StoreObjects;
+using store_api.AuthHelpers;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace store_api.Controllers

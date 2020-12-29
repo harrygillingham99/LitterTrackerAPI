@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace store_api.Objects.Helpers
+namespace litter_tracker.Objects.Helpers
 {
     public static class DescriptionHelper
     {

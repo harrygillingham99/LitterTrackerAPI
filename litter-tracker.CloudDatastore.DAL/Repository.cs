@@ -5,14 +5,14 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Google.Cloud.Datastore.V1;
 using Google.Protobuf.WellKnownTypes;
+using litter_tracker.Objects.Helpers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using store_api.Objects.Helpers;
-using static store_api.Objects.InternalObjects.DbKinds;
+using static litter_tracker.Objects.InternalObjects.DbKinds;
 using Type = System.Type;
 using Value = Google.Cloud.Datastore.V1.Value;
 
-namespace store_api.CloudDatastore.DAL
+namespace litter_tracker.CloudDatastore.DAL
 {
     public abstract class Repository
     {

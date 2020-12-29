@@ -2,6 +2,8 @@ using System;
 using System.CodeDom.Compiler;
 using System.Linq;
 using FirebaseAdmin;
+using litter_tracker.CloudDatastore.DAL;
+using litter_tracker.Objects.InternalObjects;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,8 +12,6 @@ using Microsoft.Extensions.Hosting;
 using NSwag;
 using NSwag.Generation.Processors.Security;
 using Scrutor;
-using store_api.CloudDatastore.DAL;
-using store_api.Objects.InternalObjects;
 using static Google.Apis.Auth.OAuth2.GoogleCredential;
 
 namespace store_api

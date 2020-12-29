@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Google.Cloud.Datastore.V1;
-using store_api.Objects.InternalObjects;
+using litter_tracker.Objects.InternalObjects;
 
-namespace store_api.Objects.Helpers
+namespace litter_tracker.Objects.Helpers
 {
     public static class GoogleKeyHelper
     {

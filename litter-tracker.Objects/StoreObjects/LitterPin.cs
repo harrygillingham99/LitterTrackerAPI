@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace store_api.Objects.StoreObjects
+namespace litter_tracker.Objects.StoreObjects
 {
     public class LitterPin : DataStoreItem
     {

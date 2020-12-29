@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using litter_tracker.CloudDatastore.DAL.Interfaces;
+using litter_tracker.Objects.InternalObjects;
+using litter_tracker.Objects.StoreObjects;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using store_api.CloudDatastore.DAL.Interfaces;
-using store_api.Objects.InternalObjects;
-using store_api.Objects.StoreObjects;
 
-namespace store_api.CloudDatastore.DAL.Repositories
+namespace litter_tracker.CloudDatastore.DAL.Repositories
 {
     public class LitterTrackerRepository : Repository, ILitterTrackerRepository
     {

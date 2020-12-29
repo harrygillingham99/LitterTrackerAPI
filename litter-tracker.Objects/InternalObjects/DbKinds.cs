@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace store_api.Objects.InternalObjects
+namespace litter_tracker.Objects.InternalObjects
 {
     public static class DbKinds
     {
