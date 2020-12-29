@@ -2,7 +2,6 @@ using System;
 using System.CodeDom.Compiler;
 using System.Linq;
 using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +12,7 @@ using NSwag.Generation.Processors.Security;
 using Scrutor;
 using store_api.CloudDatastore.DAL;
 using store_api.Objects.InternalObjects;
+using static Google.Apis.Auth.OAuth2.GoogleCredential;
 
 namespace store_api
 {
@@ -110,7 +110,7 @@ namespace store_api
 
             FirebaseApp.Create(new AppOptions
             {
-                Credential = GoogleCredential.GetApplicationDefault()
+                Credential = GetApplicationDefault()
             });
         }
     }
