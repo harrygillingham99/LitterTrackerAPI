@@ -13,7 +13,7 @@ namespace store_api
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Error) 
                 .Enrich.FromLogContext()
-                .WriteTo.File("./serilog.json")
+                .WriteTo.File("./logs/serilog.json")
                 .WriteTo.Console()
                 .CreateLogger();
 
