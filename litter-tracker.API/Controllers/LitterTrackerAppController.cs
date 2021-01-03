@@ -33,10 +33,10 @@ namespace store_api.Controllers
         {
             try
             {
-                //var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
+                var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
 
-                //if (requestUid == null)
-                //    return Unauthorized();
+                if (requestUid == null)
+                    return Unauthorized();
 
                 return Ok(await _litterTrackerRepository.GetLitterPins());
             }
@@ -55,10 +55,10 @@ namespace store_api.Controllers
         {
             try
             {
-                //var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
+                var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
 
-                //if (requestUid == null)
-                //    return Unauthorized();
+                if (requestUid == null)
+                    return Unauthorized();
 
                 await _litterTrackerRepository.CreateNewLitterPin(request);
 
@@ -80,10 +80,10 @@ namespace store_api.Controllers
         {
             try
             {
-                //var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
+                var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
 
-                //if (requestUid == null)
-                //    return Unauthorized();
+                if (requestUid == null)
+                    return Unauthorized();
 
                 await _litterTrackerRepository.CreateNewLitterPins(request);
 
@@ -106,13 +106,13 @@ namespace store_api.Controllers
         {
             try
             {
-                //var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
+                var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
 
-                //if (requestUid == null)
-                //    return Unauthorized();
+                if (requestUid == null)
+                    return Unauthorized();
 
-                //if(requestUid != request.CreatedByUid)
-                //    return Forbid();
+                if (requestUid != request.CreatedByUid)
+                    return Forbid();
 
                 var result = await _litterTrackerRepository.UpdateLitterPin(request);
 
@@ -134,13 +134,13 @@ namespace store_api.Controllers
         {
             try
             {
-                //var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
+                var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
 
-                //if (requestUid == null)
-                //    return Unauthorized();
+                if (requestUid == null)
+                    return Unauthorized();
 
-                //if (requestUid != request.CreatedByUid)
-                //    return Forbid();
+                if (requestUid != request.CreatedByUid)
+                    return Forbid();
 
                 await _litterTrackerRepository.DeleteLitterPin(request.DataStoreId);
 
