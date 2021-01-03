@@ -6,6 +6,13 @@ namespace litter_tracker.CloudDatastore.DAL.Interfaces
 {
     public interface ILitterTrackerRepository
     {
-        Task<IEnumerable<LitterPin>> GetCurrentBasket(string requestUid);
+        public Task<List<LitterPin>> GetLitterPins();
+
+        Task CreateNewLitterPin(LitterPin request);
+
+        Task CreateNewLitterPins(List<LitterPin> request);
+
+        Task<LitterPin> UpdateLitterPin(LitterPin request);
+        Task DeleteLitterPin(long dataStoreId);
     }
 }
