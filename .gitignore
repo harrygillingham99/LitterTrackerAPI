@@ -340,6 +340,4 @@ ASALocalRun/
 healthchecksdb
 
 #c# appsettings files, because i'm lazy
-appsettings.json
-appsettings.Development.json
 /litter-tracker.API/logs/serilog.json
