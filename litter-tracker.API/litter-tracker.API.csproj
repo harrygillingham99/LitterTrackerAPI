@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\litter-tracker.CloudDatastore.DAL\litter-tracker.CloudDatastore.DAL.csproj" />
     <ProjectReference Include="..\litter-tracker.Objects\litter-tracker.Objects.csproj" />
+    <ProjectReference Include="..\litter-tracker.Services\litter-tracker.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.yaml">

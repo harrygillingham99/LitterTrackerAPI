@@ -1,13 +1,12 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using litter_tracker.CloudDatastore.DAL.Interfaces;
-using litter_tracker.Objects.Helpers;
 using litter_tracker.Objects.StoreObjects;
+using litter_tracker.Services.OpenWeatherApi;
 using Microsoft.Extensions.Logging;
-using store_api.AuthHelpers;
+using store_api.Helpers;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace store_api.Controllers
@@ -18,11 +17,13 @@ namespace store_api.Controllers
     {
         private readonly ILogger<LitterTrackerAppController> _logger;
         private readonly ILitterTrackerRepository _litterTrackerRepository;
+        private readonly IOpenWeatherServiceAgent _openWeatherServiceAgent;
 
-        public LitterTrackerAppController(ILogger<LitterTrackerAppController> logger, ILitterTrackerRepository litterTrackerRepository)
+        public LitterTrackerAppController(ILogger<LitterTrackerAppController> logger, ILitterTrackerRepository litterTrackerRepository, IOpenWeatherServiceAgent openWeatherServiceAgent)
         {
             _logger = logger;
             _litterTrackerRepository = litterTrackerRepository;
+            _openWeatherServiceAgent = openWeatherServiceAgent;
         }
 
         [HttpGet("pins")]
@@ -48,10 +49,10 @@ namespace store_api.Controllers
         }
 
         [HttpPost("pin")]
-        [SwaggerResponse(200, "Success", typeof(ActionResult))]
+        [SwaggerResponse(200, "Success", typeof(LitterPin))]
         [SwaggerResponse(401, "Unauthorized Request")]
         [SwaggerResponse(500, "Server Error")]
-        public async Task<ActionResult> CreateNewLitterPin([FromBody] LitterPin request)
+        public async Task<ActionResult<LitterPin>> CreateNewLitterPin([FromBody] LitterPin request)
         {
             try
             {
@@ -60,9 +61,11 @@ namespace store_api.Controllers
                 if (requestUid == null)
                     return Unauthorized();
 
+                request = await request.EnsureWeatherData(_openWeatherServiceAgent);
+
                 await _litterTrackerRepository.CreateNewLitterPin(request);
 
-                return Ok();
+                return Ok(request);
 
             }
             catch (Exception e)
@@ -73,10 +76,10 @@ namespace store_api.Controllers
         }
 
         [HttpPost("pins")]
-        [SwaggerResponse(200, "Success", typeof(ActionResult))]
+        [SwaggerResponse(200, "Success", typeof(List<LitterPin>))]
         [SwaggerResponse(401, "Unauthorized Request")]
         [SwaggerResponse(500, "Server Error")]
-        public async Task<ActionResult> CreateNewLitterPins([FromBody] List<LitterPin> request)
+        public async Task<ActionResult<List<LitterPin>>> CreateNewLitterPins([FromBody] List<LitterPin> request)
         {
             try
             {
@@ -85,9 +88,11 @@ namespace store_api.Controllers
                 if (requestUid == null)
                     return Unauthorized();
 
+                request = await request.EnsureWeatherData(_openWeatherServiceAgent);
+
                 await _litterTrackerRepository.CreateNewLitterPins(request);
 
-                return Ok();
+                return Ok(request);
 
             }
             catch (Exception e)
@@ -98,7 +103,7 @@ namespace store_api.Controllers
         }
 
         [HttpPost("update-pin")]
-        [SwaggerResponse(200, "Success", typeof(ActionResult))]
+        [SwaggerResponse(200, "Success", typeof(LitterPin))]
         [SwaggerResponse(401, "Unauthorized Request")]
         [SwaggerResponse(403, "Not Pin Owner")]
         [SwaggerResponse(500, "Server Error")]
@@ -130,7 +135,7 @@ namespace store_api.Controllers
         [SwaggerResponse(401, "Unauthorized Request")]
         [SwaggerResponse(403, "Not Pin Owner")]
         [SwaggerResponse(500, "Server Error")]
-        public async Task<ActionResult<LitterPin>> DeleteLitterPin([FromBody] LitterPin request)
+        public async Task<ActionResult> DeleteLitterPin([FromBody] LitterPin request)
         {
             try
             {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Google.Cloud.Datastore.V1;
 using Google.Protobuf.WellKnownTypes;
 using litter_tracker.Objects.Helpers;
+using litter_tracker.Objects.OpenWeatherApi;
 using litter_tracker.Objects.StoreObjects;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ namespace litter_tracker.CloudDatastore.DAL
     public abstract class Repository
     {
         private readonly string[] _dataStorePropertiesToIgnore = {"DataStoreId"};
-        private readonly Type[] _typesToJsonSerialize = {typeof(List<string>), typeof(LatLng)};
+        private readonly Type[] _typesToJsonSerialize = {typeof(List<string>), typeof(LatLng), typeof(WeatherData)};
         private readonly DatastoreDb _db;
         private readonly ILogger<Repository> _logger;
         private readonly DbCollections _kind;

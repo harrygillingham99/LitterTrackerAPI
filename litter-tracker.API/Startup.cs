@@ -4,6 +4,7 @@ using System.Linq;
 using FirebaseAdmin;
 using litter_tracker.CloudDatastore.DAL;
 using litter_tracker.Objects.InternalObjects;
+using litter_tracker.Services.OpenWeatherApi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -64,7 +65,7 @@ namespace store_api
         public static void ScanForAllRemainingRegistrations(IServiceCollection services)
         {
             services.Scan(scan => scan
-                .FromAssembliesOf(typeof(Startup), typeof(Repository))
+                .FromAssembliesOf(typeof(Startup), typeof(Repository), typeof(OpenWeatherServiceAgent))
                 .AddClasses(x => x.WithoutAttribute(typeof(GeneratedCodeAttribute)))
                 .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                 .AsImplementedInterfaces()
@@ -75,6 +76,8 @@ namespace store_api
         {
             services.Configure<ConnectionStrings>(option =>
                 Configuration.GetSection(nameof(ConnectionStrings)).Bind(option));
+            services.Configure<OpenWeatherApi>(option =>
+                Configuration.GetSection(nameof(OpenWeatherApi)).Bind(option));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,6 +89,7 @@ namespace store_api
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "C:\\Users\\harry\\litter-tracker-b243db1f5c12.json");
             }
 
+            //for home staging server saving the $$ on cloud builds
             if (env.IsStaging())
             {
                 app.UseDeveloperExceptionPage();

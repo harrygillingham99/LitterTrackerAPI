@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "litter-tracker.Objects", "l
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "litter-tracker.CloudDatastore.DAL", "litter-tracker.CloudDatastore.DAL\litter-tracker.CloudDatastore.DAL.csproj", "{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "litter-tracker.Services", "litter-tracker.Services\litter-tracker.Services.csproj", "{1C285BB2-3C5B-4100-8C26-96139DBEFEEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6014AB3E-AE37-4CF3-91D5-FB640AD39DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C285BB2-3C5B-4100-8C26-96139DBEFEEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C285BB2-3C5B-4100-8C26-96139DBEFEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C285BB2-3C5B-4100-8C26-96139DBEFEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C285BB2-3C5B-4100-8C26-96139DBEFEEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

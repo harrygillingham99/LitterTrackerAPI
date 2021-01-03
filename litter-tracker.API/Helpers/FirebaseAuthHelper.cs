@@ -5,7 +5,7 @@ using FirebaseAdmin.Auth;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 
-namespace store_api.AuthHelpers
+namespace store_api.Helpers
 {
     public static class FirebaseAuthHelper
     {
