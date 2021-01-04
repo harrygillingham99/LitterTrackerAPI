@@ -31,7 +31,12 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
                 MarkerLocation = JsonConvert.DeserializeObject<LatLng>(x["MarkerLocation"].StringValue),
                 ImageUrls = JsonConvert.DeserializeObject<List<string>>(x["ImageUrls"].StringValue),
                 CreatedByUid = x["CreatedByUid"].StringValue,
-                WeatherData = JsonConvert.DeserializeObject<WeatherData>(x["WeatherData"].StringValue)
+                WeatherData = JsonConvert.DeserializeObject<WeatherData>(x["WeatherData"].StringValue),
+                AreaCleaned = x["AreaCleaned"].BooleanValue,
+                DateCreated = x["DateCreated"].TimestampValue.ToDateTime(),
+                DateLastUpdated = x["DateLastUpdated"].TimestampValue.ToDateTime(),
+                LastUpdatedByUid = x["LastUpdatedByUid"].StringValue 
+
             }).ToList();
         }
 
@@ -57,7 +62,11 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
                         MarkerLocation = JsonConvert.DeserializeObject<LatLng>(x["MarkerLocation"].StringValue),
                         ImageUrls = JsonConvert.DeserializeObject<List<string>>(x["ImageUrls"].StringValue),
                         CreatedByUid = x["CreatedByUid"].StringValue,
-                        WeatherData = JsonConvert.DeserializeObject<WeatherData>(x["WeatherData"].StringValue)
+                        WeatherData = JsonConvert.DeserializeObject<WeatherData>(x["WeatherData"].StringValue),
+                        AreaCleaned = x["AreaCleaned"].BooleanValue,
+                        DateCreated = x["DateCreated"].TimestampValue.ToDateTime(),
+                        DateLastUpdated = x["DateLastUpdated"].TimestampValue.ToDateTime(),
+                        LastUpdatedByUid = x["LastUpdatedByUid"].StringValue
                     }).FirstOrDefault();
 
             return null;
