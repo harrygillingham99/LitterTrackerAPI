@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using litter_tracker.Objects.Helpers;
 using litter_tracker.Objects.OpenWeatherApi;
 using litter_tracker.Objects.StoreObjects;
@@ -13,7 +11,7 @@ namespace litter_tracker.Services.OpenWeatherApi
     {
         private readonly string _apiKey;
         private readonly IRestClient _client;
-        private const string UrlParams = "/weather?lat={0}&lon={1}&appid={2}&units=metric";
+        private const string UrlParamsTemplate = "/weather?lat={0}&lon={1}&appid={2}&units=metric";
 
         public OpenWeatherServiceAgent(IOptions<Objects.InternalObjects.OpenWeatherApi> options)
         {
@@ -23,7 +21,7 @@ namespace litter_tracker.Services.OpenWeatherApi
 
         public async Task<WeatherData> GetWeatherForPin(LatLng location)
         {
-            var request = new RestRequest(string.Format(UrlParams, location.Latitude, location.Longitude, _apiKey));
+            var request = new RestRequest(string.Format(UrlParamsTemplate, location.Latitude, location.Longitude, _apiKey));
             return  (await _client.ExecuteAsync<OpenWeatherResponseRoot>(request)).Data.MapToWeatherData();
         }
     }

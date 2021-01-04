@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using litter_tracker.Objects.StoreObjects;
 using litter_tracker.Services.OpenWeatherApi;

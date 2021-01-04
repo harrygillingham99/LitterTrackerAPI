@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using litter_tracker.Objects.OpenWeatherApi;
 
 namespace litter_tracker.Objects.Helpers

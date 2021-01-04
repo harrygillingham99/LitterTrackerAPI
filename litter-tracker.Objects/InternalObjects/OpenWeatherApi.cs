@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime;
-using System.Text;
-
-namespace litter_tracker.Objects.InternalObjects
+﻿namespace litter_tracker.Objects.InternalObjects
 {
     public class OpenWeatherApi
     {
