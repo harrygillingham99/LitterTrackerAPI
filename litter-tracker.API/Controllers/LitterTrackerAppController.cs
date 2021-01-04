@@ -18,7 +18,6 @@ namespace store_api.Controllers
         private readonly ILogger<LitterTrackerAppController> _logger;
         private readonly ILitterTrackerRepository _litterTrackerRepository;
         private readonly IOpenWeatherServiceAgent _openWeatherServiceAgent;
-
         public LitterTrackerAppController(ILogger<LitterTrackerAppController> logger, ILitterTrackerRepository litterTrackerRepository, IOpenWeatherServiceAgent openWeatherServiceAgent)
         {
             _logger = logger;
@@ -66,7 +65,6 @@ namespace store_api.Controllers
                 await _litterTrackerRepository.CreateNewLitterPin(request);
 
                 return Ok(request);
-
             }
             catch (Exception e)
             {
@@ -93,7 +91,6 @@ namespace store_api.Controllers
                 await _litterTrackerRepository.CreateNewLitterPins(request);
 
                 return Ok(request);
-
             }
             catch (Exception e)
             {
