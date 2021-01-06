@@ -163,7 +163,7 @@ namespace store_api.Controllers
         [SwaggerResponse(200, "Success", typeof(ActionResult))]
         [SwaggerResponse(401, "Unauthorized Request")]
         [SwaggerResponse(500, "Server Error")]
-        public async Task<ActionResult> UploadImage(IFormFile file, [FromRoute] string uploadedByUid, [FromRoute] long markerDatastoreId )
+        public async Task<ActionResult> UploadImage([FromBody]IFormFile file, [FromRoute] string uploadedByUid, [FromRoute] long markerDatastoreId )
         {
             try
             {
