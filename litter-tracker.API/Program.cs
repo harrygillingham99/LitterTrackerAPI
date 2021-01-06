@@ -1,8 +1,11 @@
 using System;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Core;
 using Serilog.Events;
+using Serilog.Formatting.Json;
 
 namespace store_api
 {
@@ -10,11 +13,21 @@ namespace store_api
     {
         public static void Main(string[] args)
         {
+
+            var logging = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Staging"
+                ? new LoggingLevelSwitch(LogEventLevel.Information)
+                : new LoggingLevelSwitch(LogEventLevel.Error);
+
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Error) 
+                .MinimumLevel.ControlledBy(logging)
                 .Enrich.FromLogContext()
-                .WriteTo.File("./logs/serilog.json")
-                .WriteTo.Console()
+                .WriteTo.File(
+                    new JsonFormatter(renderMessage: true),
+                    Path.Combine(AppContext.BaseDirectory, "logs//Serilog.json"),
+                    shared: true,
+                    fileSizeLimitBytes: 20_971_520,
+                    rollOnFileSizeLimit: true,
+                    retainedFileCountLimit: 10)
                 .CreateLogger();
 
             try
