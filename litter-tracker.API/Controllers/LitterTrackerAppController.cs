@@ -6,7 +6,6 @@ using litter_tracker.CloudDatastore.DAL.Interfaces;
 using litter_tracker.Objects.ApiObjects;
 using litter_tracker.Services.GoogleCloudStorage;
 using litter_tracker.Services.OpenWeatherApi;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using store_api.Helpers;
 using Swashbuckle.AspNetCore.Annotations;
@@ -159,11 +158,11 @@ namespace store_api.Controllers
             }
         }
 
-        [HttpPost("upload-image/{uploadedByUid}/{markerDatastoreId}")]
+        [HttpPost("upload-image")]
         [SwaggerResponse(200, "Success", typeof(ActionResult))]
         [SwaggerResponse(401, "Unauthorized Request")]
         [SwaggerResponse(500, "Server Error")]
-        public async Task<ActionResult> UploadImage([FromBody]string base64Image, [FromRoute] string uploadedByUid, [FromRoute] long markerDatastoreId )
+        public async Task<ActionResult> UploadImage([FromBody]UploadImageRequest request)
         {
             try
             {
@@ -172,14 +171,9 @@ namespace store_api.Controllers
                 if (requestUid == null)
                     return Unauthorized();
 
-                await _googleCloudStorage.UploadFile(uploadedByUid, markerDatastoreId, base64Image);
+                await _googleCloudStorage.UploadFile(request);
 
                 return Ok();
-            }
-            catch (NullReferenceException e)
-            {
-                _logger.LogError(e, $"Null ref uploading file");
-                throw;
             }
             catch (Exception e)
             {
