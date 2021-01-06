@@ -163,7 +163,7 @@ namespace store_api.Controllers
         [SwaggerResponse(200, "Success", typeof(ActionResult))]
         [SwaggerResponse(401, "Unauthorized Request")]
         [SwaggerResponse(500, "Server Error")]
-        public async Task<ActionResult> UploadImage([FromBody]IFormFile file, [FromRoute] string uploadedByUid, [FromRoute] long markerDatastoreId )
+        public async Task<ActionResult> UploadImage([FromBody]string base64Image, [FromRoute] string uploadedByUid, [FromRoute] long markerDatastoreId )
         {
             try
             {
@@ -172,7 +172,7 @@ namespace store_api.Controllers
                 if (requestUid == null)
                     return Unauthorized();
 
-                await _googleCloudStorage.UploadFile(uploadedByUid, markerDatastoreId, file);
+                await _googleCloudStorage.UploadFile(uploadedByUid, markerDatastoreId, base64Image);
 
                 return Ok();
             }

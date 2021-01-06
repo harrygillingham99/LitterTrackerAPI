@@ -6,6 +6,6 @@ namespace litter_tracker.Services.GoogleCloudStorage
 {
     public interface IGoogleCloudStorage
     {
-        Task UploadFile(string uploadedByUid, long markerDatastoreId, IFormFile file);
+        Task UploadFile(string uploadedByUid, long markerDatastoreId, string base64Image);
     }
 }

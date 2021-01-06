@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Google.Apis.Storage.v1.Data;
@@ -13,15 +14,18 @@ namespace litter_tracker.Services.GoogleCloudStorage
 {
     public class GoogleCloudStorage : IGoogleCloudStorage
     {
-        public async Task UploadFile(string uploadedByUid, long markerDatastoreId, IFormFile file)
+        public async Task UploadFile(string uploadedByUid, long markerDatastoreId, string base64Image)
         {
+            byte[] imgBytes = Convert.FromBase64String(base64Image);
+
+            MemoryStream imageStream = new MemoryStream(imgBytes);
 
             var storage = await StorageClient.CreateAsync();
 
             var fileDestination = new Object
             {
                 Bucket = "litter-tracker.appspot.com",
-                ContentType = file.ContentType,
+                ContentType = "image/jpg" ,
                 Name = $"{markerDatastoreId}-{Guid.NewGuid()}-upload",
                 Metadata = new Dictionary<string, string>()
                 {
@@ -31,7 +35,7 @@ namespace litter_tracker.Services.GoogleCloudStorage
 
             };
 
-            await storage.UploadObjectAsync(fileDestination, file.OpenReadStream());
+            await storage.UploadObjectAsync(fileDestination, imageStream);
         }
     }
 }
