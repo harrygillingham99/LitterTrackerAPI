@@ -1,4 +1,4 @@
-﻿namespace litter_tracker.Objects.StoreObjects
+﻿namespace litter_tracker.Objects.ApiObjects
 {
     public abstract class DataStoreItem
     {

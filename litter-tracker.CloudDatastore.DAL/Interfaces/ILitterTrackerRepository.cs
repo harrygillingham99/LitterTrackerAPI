@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using litter_tracker.Objects.StoreObjects;
+using litter_tracker.Objects.ApiObjects;
 
 namespace litter_tracker.CloudDatastore.DAL.Interfaces
 {

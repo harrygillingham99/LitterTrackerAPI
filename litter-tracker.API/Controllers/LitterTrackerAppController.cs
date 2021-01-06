@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using litter_tracker.CloudDatastore.DAL.Interfaces;
-using litter_tracker.Objects.StoreObjects;
+using litter_tracker.Objects.ApiObjects;
+using litter_tracker.Services.GoogleCloudStorage;
 using litter_tracker.Services.OpenWeatherApi;
 using Microsoft.Extensions.Logging;
 using store_api.Helpers;
@@ -18,11 +19,13 @@ namespace store_api.Controllers
         private readonly ILogger<LitterTrackerAppController> _logger;
         private readonly ILitterTrackerRepository _litterTrackerRepository;
         private readonly IOpenWeatherServiceAgent _openWeatherServiceAgent;
-        public LitterTrackerAppController(ILogger<LitterTrackerAppController> logger, ILitterTrackerRepository litterTrackerRepository, IOpenWeatherServiceAgent openWeatherServiceAgent)
+        private readonly IGoogleCloudStorage _googleCloudStorage;
+        public LitterTrackerAppController(ILogger<LitterTrackerAppController> logger, ILitterTrackerRepository litterTrackerRepository, IOpenWeatherServiceAgent openWeatherServiceAgent, IGoogleCloudStorage googleCloudStorage)
         {
             _logger = logger;
             _litterTrackerRepository = litterTrackerRepository;
             _openWeatherServiceAgent = openWeatherServiceAgent;
+            _googleCloudStorage = googleCloudStorage;
         }
 
         [HttpGet("pins")]
@@ -145,6 +148,30 @@ namespace store_api.Controllers
                     return Forbid();
 
                 await _litterTrackerRepository.DeleteLitterPin(request.DataStoreId);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error updating pin");
+                throw;
+            }
+        }
+
+        [HttpPost("upload-image")]
+        [SwaggerResponse(200, "Success", typeof(ActionResult))]
+        [SwaggerResponse(401, "Unauthorized Request")]
+        [SwaggerResponse(500, "Server Error")]
+        public async Task<ActionResult> UploadImage([FromForm] ImageUploadRequest request)
+        {
+            try
+            {
+                var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
+
+                if (requestUid == null)
+                    return Unauthorized();
+
+                await _googleCloudStorage.UploadFile(request);
 
                 return Ok();
             }

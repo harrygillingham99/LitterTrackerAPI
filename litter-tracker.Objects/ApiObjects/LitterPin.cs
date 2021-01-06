@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using litter_tracker.Objects.OpenWeatherApi;
 
-namespace litter_tracker.Objects.StoreObjects
+namespace litter_tracker.Objects.ApiObjects
 {
     public class LitterPin : DataStoreItem
     {

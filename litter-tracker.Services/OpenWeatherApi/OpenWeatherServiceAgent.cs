@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using litter_tracker.Objects.ApiObjects;
 using litter_tracker.Objects.Helpers;
 using litter_tracker.Objects.OpenWeatherApi;
-using litter_tracker.Objects.StoreObjects;
 using Microsoft.Extensions.Options;
 using RestSharp;
 

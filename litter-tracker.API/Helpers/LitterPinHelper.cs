@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using litter_tracker.Objects.StoreObjects;
+using litter_tracker.Objects.ApiObjects;
 using litter_tracker.Services.OpenWeatherApi;
 
 namespace store_api.Helpers
