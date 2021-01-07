@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace litter_tracker.Objects.ApiObjects
+﻿namespace litter_tracker.Objects.ApiObjects
 {
     public class UploadImageRequest
     {

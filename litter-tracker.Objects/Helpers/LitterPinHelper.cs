@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using litter_tracker.Objects.ApiObjects;
 using litter_tracker.Objects.InternalObjects;
 using litter_tracker.Objects.OpenWeatherApi;
