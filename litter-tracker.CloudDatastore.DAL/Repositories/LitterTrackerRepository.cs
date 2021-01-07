@@ -36,24 +36,55 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
                 AreaCleaned = x["AreaCleaned"].BooleanValue,
                 DateCreated = x["DateCreated"].TimestampValue.ToDateTime(),
                 DateLastUpdated = x["DateLastUpdated"].TimestampValue.ToDateTime(),
-                LastUpdatedByUid = x["LastUpdatedByUid"].StringValue 
-
+                LastUpdatedByUid = x["LastUpdatedByUid"].StringValue
             }).ToList();
         }
 
-        public async Task CreateNewLitterPin(LitterPin request, string requestUid)
+        public async Task<LitterPin> CreateNewLitterPin(LitterPin request, string requestUid)
         {
             request = request.EnsureObjectValid(requestUid, CreatePin);
             await Insert(request);
+            return (await Get(Filter.Equal("__key__", request.DataStoreId.ToKey(Kind))))
+                .Select(x => new LitterPin
+                {
+                    DataStoreId = x.Key.ToId(),
+                    MarkerLocation = JsonConvert.DeserializeObject<LatLng>(x["MarkerLocation"].StringValue),
+                    ImageUrls = JsonConvert.DeserializeObject<List<string>>(x["ImageUrls"].StringValue),
+                    CreatedByUid = x["CreatedByUid"].StringValue,
+                    WeatherData = JsonConvert.DeserializeObject<WeatherData>(x["WeatherData"].StringValue),
+                    AreaCleaned = x["AreaCleaned"].BooleanValue,
+                    DateCreated = x["DateCreated"].TimestampValue.ToDateTime(),
+                    DateLastUpdated = x["DateLastUpdated"].TimestampValue.ToDateTime(),
+                    LastUpdatedByUid = x["LastUpdatedByUid"].StringValue
+                }).FirstOrDefault();
         }
 
-        public async Task CreateNewLitterPins(List<LitterPin> request, string requestUid)
+        public async Task<List<LitterPin>> CreateNewLitterPins(List<LitterPin> request, string requestUid)
         {
+            var createdPins = new List<LitterPin>();
+
             foreach (var pin in request)
             {
                 var pinToCreate = pin.EnsureObjectValid(requestUid, CreatePin);
+
                 await Insert(pinToCreate);
+
+                createdPins.Add((await Get(Filter.Equal("__key__", pin.DataStoreId.ToKey(Kind))))
+                    .Select(x => new LitterPin
+                    {
+                        DataStoreId = x.Key.ToId(),
+                        MarkerLocation = JsonConvert.DeserializeObject<LatLng>(x["MarkerLocation"].StringValue),
+                        ImageUrls = JsonConvert.DeserializeObject<List<string>>(x["ImageUrls"].StringValue),
+                        CreatedByUid = x["CreatedByUid"].StringValue,
+                        WeatherData = JsonConvert.DeserializeObject<WeatherData>(x["WeatherData"].StringValue),
+                        AreaCleaned = x["AreaCleaned"].BooleanValue,
+                        DateCreated = x["DateCreated"].TimestampValue.ToDateTime(),
+                        DateLastUpdated = x["DateLastUpdated"].TimestampValue.ToDateTime(),
+                        LastUpdatedByUid = x["LastUpdatedByUid"].StringValue
+                    }).FirstOrDefault());
             }
+
+            return createdPins;
         }
 
         public async Task<LitterPin> UpdateLitterPin(LitterPin request, string requestUid)

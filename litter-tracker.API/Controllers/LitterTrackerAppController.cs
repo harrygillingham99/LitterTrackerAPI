@@ -65,9 +65,9 @@ namespace store_api.Controllers
 
                 request = await request.EnsureWeatherData(_openWeatherServiceAgent);
 
-                await _litterTrackerRepository.CreateNewLitterPin(request, requestUid);
+                var result = await _litterTrackerRepository.CreateNewLitterPin(request, requestUid);
 
-                return Ok(request);
+                return Ok(result);
             }
             catch (Exception e)
             {
@@ -91,9 +91,9 @@ namespace store_api.Controllers
 
                 request = await request.EnsureWeatherData(_openWeatherServiceAgent);
 
-                await _litterTrackerRepository.CreateNewLitterPins(request, requestUid);
+                var result = await _litterTrackerRepository.CreateNewLitterPins(request, requestUid);
 
-                return Ok(request);
+                return Ok(result);
             }
             catch (Exception e)
             {
