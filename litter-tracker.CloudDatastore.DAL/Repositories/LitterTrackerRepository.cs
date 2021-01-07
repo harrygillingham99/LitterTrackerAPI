@@ -44,7 +44,7 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
         {
             request = request.EnsureObjectValid(requestUid, CreatePin);
             await Insert(request);
-            return (await Get(Filter.Equal("__key__", request.DataStoreId.ToKey(Kind))))
+            return (await Get(Filter.Equal("MarkerLocation", JsonConvert.SerializeObject(request.MarkerLocation))))
                 .Select(x => new LitterPin
                 {
                     DataStoreId = x.Key.ToId(),
@@ -69,7 +69,7 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
 
                 await Insert(pinToCreate);
 
-                createdPins.Add((await Get(Filter.Equal("__key__", pin.DataStoreId.ToKey(Kind))))
+                createdPins.Add((await Get(Filter.Equal("MarkerLocation", JsonConvert.SerializeObject(pin.MarkerLocation))))
                     .Select(x => new LitterPin
                     {
                         DataStoreId = x.Key.ToId(),
