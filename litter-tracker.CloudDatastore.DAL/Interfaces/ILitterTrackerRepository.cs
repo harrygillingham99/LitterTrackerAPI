@@ -8,11 +8,11 @@ namespace litter_tracker.CloudDatastore.DAL.Interfaces
     {
         public Task<List<LitterPin>> GetLitterPins();
 
-        Task CreateNewLitterPin(LitterPin request);
+        Task CreateNewLitterPin(LitterPin request, string requestUid);
 
-        Task CreateNewLitterPins(List<LitterPin> request);
+        Task CreateNewLitterPins(List<LitterPin> request, string requestUid);
 
-        Task<LitterPin> UpdateLitterPin(LitterPin request);
+        Task<LitterPin> UpdateLitterPin(LitterPin request, string requestUid);
         Task DeleteLitterPin(long dataStoreId);
     }
 }

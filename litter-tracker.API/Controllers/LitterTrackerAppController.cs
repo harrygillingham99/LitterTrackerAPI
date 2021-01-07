@@ -65,7 +65,7 @@ namespace store_api.Controllers
 
                 request = await request.EnsureWeatherData(_openWeatherServiceAgent);
 
-                await _litterTrackerRepository.CreateNewLitterPin(request);
+                await _litterTrackerRepository.CreateNewLitterPin(request, requestUid);
 
                 return Ok(request);
             }
@@ -91,7 +91,7 @@ namespace store_api.Controllers
 
                 request = await request.EnsureWeatherData(_openWeatherServiceAgent);
 
-                await _litterTrackerRepository.CreateNewLitterPins(request);
+                await _litterTrackerRepository.CreateNewLitterPins(request, requestUid);
 
                 return Ok(request);
             }
@@ -119,7 +119,7 @@ namespace store_api.Controllers
                 if (requestUid != request.CreatedByUid)
                     return Forbid();
 
-                var result = await _litterTrackerRepository.UpdateLitterPin(request);
+                var result = await _litterTrackerRepository.UpdateLitterPin(request, requestUid);
 
                 return result == null ? Problem(detail: "Failed to update and return requested pin") : Ok(result);
             }
@@ -159,10 +159,10 @@ namespace store_api.Controllers
         }
 
         [HttpPost("upload-image")]
-        [SwaggerResponse(200, "Success", typeof(ActionResult))]
+        [SwaggerResponse(200, "Success", typeof(string))]
         [SwaggerResponse(401, "Unauthorized Request")]
         [SwaggerResponse(500, "Server Error")]
-        public async Task<ActionResult> UploadImage([FromBody]UploadImageRequest request)
+        public async Task<ActionResult<string>> UploadImage([FromBody]UploadImageRequest request)
         {
             try
             {
@@ -171,9 +171,7 @@ namespace store_api.Controllers
                 if (requestUid == null)
                     return Unauthorized();
 
-                await _googleCloudStorage.UploadFile(request);
-
-                return Ok();
+                return Ok(await _googleCloudStorage.UploadFile(request));
             }
             catch (Exception e)
             {

@@ -10,5 +10,11 @@ namespace litter_tracker.Objects.InternalObjects
             LitterPin = 1
 
         }
+
+        public enum PinOperationType
+        {
+            CreatePin = 1,
+            UpdatePin = 2
+        }
     }
 }

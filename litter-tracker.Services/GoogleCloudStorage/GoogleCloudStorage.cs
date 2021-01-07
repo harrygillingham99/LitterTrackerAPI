@@ -10,28 +10,29 @@ namespace litter_tracker.Services.GoogleCloudStorage
 {
     public class GoogleCloudStorage : IGoogleCloudStorage
     {
-        public async Task UploadFile(UploadImageRequest request)
+        public async Task<string> UploadFile(UploadImageRequest request)
         {
-            byte[] imgBytes = Convert.FromBase64String(request.Base64Image);
-
-            MemoryStream imageStream = new MemoryStream(imgBytes);
+            MemoryStream imageStream = new MemoryStream(Convert.FromBase64String(request.Base64Image));
 
             var storage = await StorageClient.CreateAsync();
+
+            var fileName = $"{request.MarkerDatastoreId}-{Guid.NewGuid()}-upload";
 
             var fileDestination = new Object
             {
                 Bucket = "litter-tracker.appspot.com",
                 ContentType = "image/jpg" ,
-                Name = $"{request.MarkerDatastoreId}-{Guid.NewGuid()}-upload",
+                Name = fileName,
                 Metadata = new Dictionary<string, string>()
                 {
                     {"LitterPinId", request.MarkerDatastoreId.ToString()}, 
                     {"UploadedBy", request.UploadedByUid},
                 },
-
             };
 
             await storage.UploadObjectAsync(fileDestination, imageStream);
+
+            return fileName;
         }
     }
 }

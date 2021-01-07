@@ -10,6 +10,7 @@ using litter_tracker.Objects.OpenWeatherApi;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using static litter_tracker.Objects.InternalObjects.DbKinds.PinOperationType;
 
 namespace litter_tracker.CloudDatastore.DAL.Repositories
 {
@@ -40,18 +41,25 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
             }).ToList();
         }
 
-        public async Task CreateNewLitterPin(LitterPin request)
+        public async Task CreateNewLitterPin(LitterPin request, string requestUid)
         {
+            request = request.EnsureObjectValid(requestUid, CreatePin);
             await Insert(request);
         }
 
-        public async Task CreateNewLitterPins(List<LitterPin> request)
+        public async Task CreateNewLitterPins(List<LitterPin> request, string requestUid)
         {
-            foreach (var pin in request) await Insert(pin);
+            foreach (var pin in request)
+            {
+                var pinToCreate = pin.EnsureObjectValid(requestUid, CreatePin);
+                await Insert(pinToCreate);
+            }
         }
 
-        public async Task<LitterPin> UpdateLitterPin(LitterPin request)
+        public async Task<LitterPin> UpdateLitterPin(LitterPin request, string requestUid)
         {
+            request = request.EnsureObjectValid(requestUid, UpdatePin);
+
             var result = await Update(request, request.DataStoreId.ToKey(Kind));
 
             if (result)

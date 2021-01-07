@@ -14,6 +14,5 @@ namespace litter_tracker.Objects.ApiObjects
         public DateTime DateCreated { get; set; }
         public DateTime DateLastUpdated { get; set; }
         public string LastUpdatedByUid { get; set; }
-
     }
 }
