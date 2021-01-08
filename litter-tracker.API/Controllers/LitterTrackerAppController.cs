@@ -147,7 +147,13 @@ namespace store_api.Controllers
                 if (requestUid != request.CreatedByUid)
                     return Forbid();
 
-                await _litterTrackerRepository.DeleteLitterPin(request.DataStoreId);
+                var tasks = new[] 
+                {
+                    _googleCloudStorage.DeleteImages(request.ImageUrls), 
+                    _litterTrackerRepository.DeleteLitterPin(request.DataStoreId)
+                };
+
+                Task.WaitAll(tasks);
 
                 return Ok();
             }

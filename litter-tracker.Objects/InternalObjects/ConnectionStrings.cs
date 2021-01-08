@@ -3,5 +3,6 @@
     public class ConnectionStrings
     {
         public string ProjectName { get; set; }
+        public string BucketName { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using litter_tracker.Objects.ApiObjects;
 
 namespace litter_tracker.Services.GoogleCloudStorage
@@ -6,5 +7,6 @@ namespace litter_tracker.Services.GoogleCloudStorage
     public interface IGoogleCloudStorage
     {
         Task<string> UploadFile(UploadImageRequest request);
+        Task DeleteImages(List<string> fileNames);
     }
 }
