@@ -149,7 +149,7 @@ namespace store_api.Controllers
 
                 var tasks = new[] 
                 {
-                    _googleCloudStorage.DeleteImages(request.ImageUrls), 
+                    _googleCloudStorage.DeleteFiles(request.ImageUrls), 
                     _litterTrackerRepository.DeleteLitterPin(request.DataStoreId)
                 };
 

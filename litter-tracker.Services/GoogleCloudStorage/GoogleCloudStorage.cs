@@ -14,17 +14,19 @@ namespace litter_tracker.Services.GoogleCloudStorage
     public class GoogleCloudStorage : IGoogleCloudStorage
     {
         private readonly string _bucketName;
+        private readonly Task<StorageClient> _client;
 
         public GoogleCloudStorage(IOptions<ConnectionStrings> connectionStrings)
         {
             _bucketName = connectionStrings.Value.BucketName;
+            _client = StorageClient.CreateAsync();
         }
 
         public async Task<string> UploadFile(UploadImageRequest request)
         {
             MemoryStream imageStream = new MemoryStream(Convert.FromBase64String(request.Base64Image));
 
-            var storage = await StorageClient.CreateAsync();
+            var storage = await _client;
 
             var fileName = $"{request.MarkerDatastoreId}-{Guid.NewGuid()}-upload";
 
@@ -45,9 +47,9 @@ namespace litter_tracker.Services.GoogleCloudStorage
             return fileName;
         }
 
-        public async Task DeleteImages(List<string> fileNames)
+        public async Task DeleteFiles(List<string> fileNames)
         {
-            var storage = await StorageClient.CreateAsync();
+            var storage = await _client;
             foreach (var file in fileNames)
             {
                 await storage.DeleteObjectAsync(_bucketName, file);

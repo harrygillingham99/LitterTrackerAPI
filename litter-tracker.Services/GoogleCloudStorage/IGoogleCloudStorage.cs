@@ -7,6 +7,6 @@ namespace litter_tracker.Services.GoogleCloudStorage
     public interface IGoogleCloudStorage
     {
         Task<string> UploadFile(UploadImageRequest request);
-        Task DeleteImages(List<string> fileNames);
+        Task DeleteFiles(List<string> fileNames);
     }
 }
