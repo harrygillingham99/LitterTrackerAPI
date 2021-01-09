@@ -13,7 +13,7 @@ namespace store_api
     {
         public static void Main(string[] args)
         {
-
+            //because I can't debug this locally with expo. Have to log absolutely everything when its deployed
             var logging = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Staging"
                 ? new LoggingLevelSwitch(LogEventLevel.Information)
                 : new LoggingLevelSwitch(LogEventLevel.Error);
