@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using litter_tracker.CloudDatastore.DAL.Repositories;
 using litter_tracker.Objects.ApiObjects;
 
 namespace litter_tracker.CloudDatastore.DAL.Interfaces
@@ -14,5 +15,6 @@ namespace litter_tracker.CloudDatastore.DAL.Interfaces
 
         Task<LitterPin> UpdateLitterPin(LitterPin request, string requestUid);
         Task DeleteLitterPin(long dataStoreId);
+        Task<UserStatistics> GetStatsForUser(string requestUid);
     }
 }

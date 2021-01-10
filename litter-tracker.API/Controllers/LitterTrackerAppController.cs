@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using litter_tracker.CloudDatastore.DAL.Interfaces;
+using litter_tracker.CloudDatastore.DAL.Repositories;
 using litter_tracker.Objects.ApiObjects;
 using litter_tracker.Services.GoogleCloudStorage;
 using litter_tracker.Services.OpenWeatherApi;
@@ -178,6 +179,28 @@ namespace store_api.Controllers
                     return Unauthorized();
 
                 return Ok(await _googleCloudStorage.UploadFile(request));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error uploading file");
+                throw;
+            }
+        }
+
+        [HttpGet("statistics")]
+        [SwaggerResponse(200, "Success", typeof(UserStatistics))]
+        [SwaggerResponse(401, "Unauthorized Request")]
+        [SwaggerResponse(500, "Server Error")]
+        public async Task<ActionResult<string>> GetUserStatistics()
+        {
+            try
+            {
+                var requestUid = await HttpContext.Request.AuthorizeWithFirebase();
+
+                if (requestUid == null)
+                    return Unauthorized();
+
+                return Ok(await _litterTrackerRepository.GetStatsForUser(requestUid));
             }
             catch (Exception e)
             {
