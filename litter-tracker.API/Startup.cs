@@ -53,6 +53,7 @@ namespace store_api
             services.AddOpenApiDocument(configure =>
             {
                 configure.Title = "Litter Tracker API";
+                configure.Description = "An API interface to handle the CRUD for the litter tracker.";
                 configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
                 {
                     Type = OpenApiSecuritySchemeType.ApiKey,
