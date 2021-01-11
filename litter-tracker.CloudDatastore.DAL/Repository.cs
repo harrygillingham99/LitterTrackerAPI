@@ -44,8 +44,8 @@ namespace litter_tracker.CloudDatastore.DAL
                 {
                     Filter = filter,
                 };
-                var result = (await _db.RunQueryAsync(query)).Entities;
-                return result;
+
+                return (await _db.RunQueryAsync(query)).Entities;
             }
             catch (Exception ex)
             {
