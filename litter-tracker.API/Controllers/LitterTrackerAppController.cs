@@ -70,11 +70,9 @@ namespace store_api.Controllers
                 if (requestUid == null)
                     return Unauthorized();
 
-                request = await request.EnsureWeatherData(_openWeatherServiceAgent);
+                var result = _litterTrackerRepository.CreateNewLitterPin(await request.EnsureWeatherData(_openWeatherServiceAgent), requestUid);
 
-                var result = await _litterTrackerRepository.CreateNewLitterPin(request, requestUid);
-
-                return Ok(result);
+                return Ok(await result);
             }
             catch (Exception e)
             {
@@ -96,11 +94,9 @@ namespace store_api.Controllers
                 if (requestUid == null)
                     return Unauthorized();
 
-                request = await request.EnsureWeatherData(_openWeatherServiceAgent);
+                var result =  _litterTrackerRepository.CreateNewLitterPins(await request.EnsureWeatherData(_openWeatherServiceAgent), requestUid);
 
-                var result = await _litterTrackerRepository.CreateNewLitterPins(request, requestUid);
-
-                return Ok(result);
+                return Ok(await result);
             }
             catch (Exception e)
             {

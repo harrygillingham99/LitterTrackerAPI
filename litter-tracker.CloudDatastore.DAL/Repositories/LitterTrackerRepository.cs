@@ -48,7 +48,6 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
             foreach (var pin in request)
             {
                 await Insert(pin.EnsureObjectValid(requestUid, CreatePin));
-
                 createdPins.Add((await Get(Filter.Equal("MarkerLocation", JsonConvert.SerializeObject(pin.MarkerLocation))))
                     .Select(MapEntityToLitterPin).FirstOrDefault());
             }
