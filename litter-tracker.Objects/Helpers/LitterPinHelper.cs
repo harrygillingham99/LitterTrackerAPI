@@ -6,6 +6,10 @@ using litter_tracker.Objects.OpenWeatherApi;
 
 namespace litter_tracker.Objects.Helpers
 {
+    /*
+    LitterPin helper for use at the repository level. 
+    Enures that certain properties are filled out depending on the operation.
+    */
     public static class LitterPinHelper
     {
         public static LitterPin EnsureObjectValid(this LitterPin pin, string requestUid, DbKinds.PinOperationType operation)

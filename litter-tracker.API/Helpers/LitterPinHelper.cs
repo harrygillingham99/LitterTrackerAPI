@@ -5,6 +5,9 @@ using litter_tracker.Services.OpenWeatherApi;
 
 namespace store_api.Helpers
 {
+    /*
+    Helper class for LitterPin to populate the WeatherData property by invoking a call to the OpenWeatherMap API
+    */
     public static class LitterPinHelper
     {
         public static async Task<LitterPin> EnsureWeatherData(this LitterPin pin, IOpenWeatherServiceAgent service)

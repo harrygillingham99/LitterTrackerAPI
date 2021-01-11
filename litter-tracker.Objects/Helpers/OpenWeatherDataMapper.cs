@@ -3,6 +3,9 @@ using litter_tracker.Objects.OpenWeatherApi;
 
 namespace litter_tracker.Objects.Helpers
 {
+    /*
+    Helper class to map weather data to the internal WeatherData object
+    */
     public static class OpenWeatherDataMapper
     {
         public static WeatherData MapToWeatherData(this OpenWeatherResponseRoot response)
@@ -14,7 +17,6 @@ namespace litter_tracker.Objects.Helpers
                 WindSpeed = (decimal) response.wind.speed,
                 WindDirection = (decimal) response.wind.deg
             };
-
         }
     }
 }

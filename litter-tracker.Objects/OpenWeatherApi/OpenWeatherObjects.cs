@@ -2,7 +2,10 @@
 
 namespace litter_tracker.Objects.OpenWeatherApi
 {
-    // Generated using JSON2csharp.com from OpenWeatherMapApi example response objects
+    /*
+    Response objects returned from OpenWeatherMapApi call.
+    Generated using JSON2csharp.com from OpenWeatherMapApi example response objects
+    */
     public class Coord
     {
         public double lon { get; set; }

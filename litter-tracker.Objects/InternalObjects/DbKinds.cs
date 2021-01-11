@@ -2,6 +2,9 @@
 
 namespace litter_tracker.Objects.InternalObjects
 {
+    /*
+    Enums used to store operation types and Datastore kinds.
+    */
     public static class DbKinds
     {
         public enum DbCollections

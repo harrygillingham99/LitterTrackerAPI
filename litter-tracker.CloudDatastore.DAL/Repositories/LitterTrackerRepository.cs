@@ -14,6 +14,11 @@ using static litter_tracker.Objects.InternalObjects.DbKinds.PinOperationType;
 
 namespace litter_tracker.CloudDatastore.DAL.Repositories
 {
+    /*
+    Repository class for all the crud related to LitterPins and Google's NoSQL Datastore.
+    Uses my base class to interface with the Google library. This class handles the mapping of the
+    Entity back to a LitterPin.
+    */
     public class LitterTrackerRepository : Repository, ILitterTrackerRepository
     {
         private const DbKinds.DbCollections Kind = DbKinds.DbCollections.LitterPin;
@@ -31,8 +36,7 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
 
         public async Task<LitterPin> CreateNewLitterPin(LitterPin request, string requestUid)
         {
-            request = request.EnsureObjectValid(requestUid, CreatePin);
-            await Insert(request);
+            await Insert(request.EnsureObjectValid(requestUid, CreatePin));
             return (await Get(Filter.Equal("MarkerLocation", JsonConvert.SerializeObject(request.MarkerLocation))))
                 .Select(MapEntityToLitterPin).FirstOrDefault();
         }
@@ -43,9 +47,7 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
 
             foreach (var pin in request)
             {
-                var pinToCreate = pin.EnsureObjectValid(requestUid, CreatePin);
-
-                await Insert(pinToCreate);
+                await Insert(pin.EnsureObjectValid(requestUid, CreatePin));
 
                 createdPins.Add((await Get(Filter.Equal("MarkerLocation", JsonConvert.SerializeObject(pin.MarkerLocation))))
                     .Select(MapEntityToLitterPin).FirstOrDefault());
@@ -56,9 +58,7 @@ namespace litter_tracker.CloudDatastore.DAL.Repositories
 
         public async Task<LitterPin> UpdateLitterPin(LitterPin request, string requestUid)
         {
-            request = request.EnsureObjectValid(requestUid, UpdatePin);
-
-            var result = await Update(request, request.DataStoreId.ToKey(Kind));
+            var result = await Update(request.EnsureObjectValid(requestUid, UpdatePin), request.DataStoreId.ToKey(Kind));
 
             if (result)
                 return (await Get(Filter.Equal("__key__", request.DataStoreId.ToKey(Kind))))

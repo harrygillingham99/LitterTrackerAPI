@@ -17,8 +17,15 @@ using static Google.Apis.Auth.OAuth2.GoogleCredential;
 
 namespace store_api
 {
+    /*
+    Handles all of the dependency injection, CORS setup and Swagger/OpenAPI setup for the application.
+    Automatic interface class registration with Scrutor so no need to register each interface to class.
+    Also optionally sets the Google Application credential environment variable when in development or staging.
+    When deployed it magically exists already.
+    */
     public class Startup
     {
+
         private readonly string CorsKey = "_myAllowSpecificOrigins";
 
         public Startup(IConfiguration configuration)

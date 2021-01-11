@@ -16,6 +16,11 @@ using Value = Google.Cloud.Datastore.V1.Value;
 
 namespace litter_tracker.CloudDatastore.DAL
 {
+    /*
+    Generic typed base class for all the CRUD for strongly typed objects and Google's NoSQL Datastore. 
+    Uses reflection to attempt to map strongly typed objects to the correct Entity property.
+    Can optionally JSON serialize complex objects
+    */
     public abstract class Repository
     {
         private readonly string[] _dataStorePropertiesToIgnore = {"DataStoreId"};

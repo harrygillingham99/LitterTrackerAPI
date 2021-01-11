@@ -7,6 +7,9 @@ using Serilog;
 
 namespace store_api.Helpers
 {
+    /*
+    Helper class for HttpRequest to extract the firebase token from the header and verify it.
+    */
     public static class FirebaseAuthHelper
     {
         public static async Task<string> AuthorizeWithFirebase(this HttpRequest request)

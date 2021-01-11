@@ -7,6 +7,10 @@ using RestSharp;
 
 namespace litter_tracker.Services.OpenWeatherApi
 {
+    /*
+    Service agent class for interfacing with OpenWeatherMap API.
+    Uses RestSharp to form the web request.
+    */
     public class OpenWeatherServiceAgent : IOpenWeatherServiceAgent
     {
         private readonly string _apiKey;

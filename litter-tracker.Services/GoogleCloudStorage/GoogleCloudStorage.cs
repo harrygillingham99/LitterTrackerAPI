@@ -11,6 +11,10 @@ using Object = Google.Apis.Storage.v1.Data.Object;
 
 namespace litter_tracker.Services.GoogleCloudStorage
 {
+    /*
+    Service agent class for interfacing with Google cloud Storage API. 
+    Used specifically for uploading and deleting images.
+    */
     public class GoogleCloudStorage : IGoogleCloudStorage
     {
         private readonly string _bucketName;

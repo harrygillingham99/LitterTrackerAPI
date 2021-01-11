@@ -8,12 +8,14 @@ using Serilog.Events;
 using Serilog.Formatting.Json;
 
 namespace store_api
-{
+{   /*
+    The entry point for the application.
+    */
     public class Program
     {
         public static void Main(string[] args)
         {
-            //because I can't debug this locally with expo. Have to log absolutely everything when its deployed
+            //because I can't debug this locally with expo. Have to log absolutely everything when its deployed to my box
             var logging = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Staging"
                 ? new LoggingLevelSwitch(LogEventLevel.Information)
                 : new LoggingLevelSwitch(LogEventLevel.Error);

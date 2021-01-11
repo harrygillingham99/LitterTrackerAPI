@@ -13,6 +13,12 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace store_api.Controllers
 {
+    /*
+    The main controller for the app to call. 
+    Contains all the CRUD for LitterPins and endpoints to get statistics for users and upload images. 
+    All methods are decorated with SwaggerResponse to make the OpenApi document used to generate the 
+    client as specific as possible.
+    */
     [Route("app")]
     [ApiController]
     public class LitterTrackerAppController : ControllerBase
