@@ -5,7 +5,7 @@ using FirebaseAdmin.Auth;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 
-namespace store_api.Helpers
+namespace litter_tracker.API.Helpers
 {
     /*
     Helper class for HttpRequest to extract the firebase token from the header and verify it.

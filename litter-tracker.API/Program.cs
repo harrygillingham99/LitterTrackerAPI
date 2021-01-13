@@ -7,7 +7,7 @@ using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 
-namespace store_api
+namespace litter_tracker.API
 {   /*
     The entry point for the application.
     */

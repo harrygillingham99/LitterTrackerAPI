@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>store_api</RootNamespace>
+    <RootNamespace>litter_tracker.API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

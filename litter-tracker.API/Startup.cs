@@ -15,7 +15,7 @@ using NSwag.Generation.Processors.Security;
 using Scrutor;
 using static Google.Apis.Auth.OAuth2.GoogleCredential;
 
-namespace store_api
+namespace litter_tracker.API
 {
     /*
     Handles all of the dependency injection, CORS setup and Swagger/OpenAPI setup for the application.

@@ -1,4 +1,4 @@
-﻿namespace litter_tracker.CloudDatastore.DAL.Repositories
+﻿namespace litter_tracker.Objects.ApiObjects
 {
     public class UserStatistics
     {

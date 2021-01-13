@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using litter_tracker.Objects.ApiObjects;
 using litter_tracker.Services.OpenWeatherApi;
 
-namespace store_api.Helpers
+namespace litter_tracker.API.Helpers
 {
     /*
     Helper class for LitterPin to populate the WeatherData property by invoking a call to the OpenWeatherMap API

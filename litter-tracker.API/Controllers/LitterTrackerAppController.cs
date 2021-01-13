@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using litter_tracker.API.Helpers;
 using litter_tracker.CloudDatastore.DAL.Interfaces;
-using litter_tracker.CloudDatastore.DAL.Repositories;
 using litter_tracker.Objects.ApiObjects;
 using litter_tracker.Services.GoogleCloudStorage;
 using litter_tracker.Services.OpenWeatherApi;
 using Microsoft.Extensions.Logging;
-using store_api.Helpers;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace store_api.Controllers
+namespace litter_tracker.API.Controllers
 {
     /*
     The main controller for the app to call. 
