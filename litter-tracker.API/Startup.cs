@@ -114,7 +114,11 @@ namespace litter_tracker.API
 
             app.UseCors(CorsKey);
 
-            app.UseReDoc();
+            //ReDoc API documentation endpoint
+            app.UseReDoc(options =>
+            {
+                options.Path = "/docs";
+            });
 
             app.UseAuthorization();
 
