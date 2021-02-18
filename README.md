@@ -9,3 +9,5 @@ Received 90/100
 - Includes a sweet Google Datastore base class that I spent too much time doing
 - Requires valid firebase JWT token in "Authorization" header. Swagger UI provides input for this
 - Uses Google Storage Buckets for image storage
+# TODO:
+- Refactor the DAL and image storage to run on a windows server/SQL environment without google cloud ($$$)
